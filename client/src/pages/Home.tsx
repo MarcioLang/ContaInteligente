@@ -90,6 +90,11 @@ export default function Home() {
       resposta:
         "Depois da análise gratuita, se fizer sentido, você pode contratar o acompanhamento mensal por R$ 297. Nele revisamos seus números, ajustamos retirada e provisão e entregamos um relatório simples e objetivo.",
     },
+    {
+      pergunta: "Preciso trocar de contador?",
+      resposta:
+        "Não. Nosso trabalho não substitui a contabilidade. Complementamos a visão financeira da empresa ajudando na retirada, provisão de impostos e organização do caixa.",
+    },
   ];
 
   return (
@@ -273,6 +278,7 @@ export default function Home() {
         <div className="container">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Como a análise gratuita funciona</h2>
+            <p className="text-gray-600 mt-2">A análise leva cerca de 10 a 15 minutos e é feita manualmente por um especialista.</p>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">Você não precisa entender de contabilidade para receber valor. Nós organizamos o raciocínio para você.</p>
           </div>
 
@@ -406,7 +412,7 @@ export default function Home() {
               <h3 className="font-bold text-foreground mb-3">Dentista</h3>
               <p className="text-sm text-muted-foreground mb-3">Faturamento médio: <span className="font-semibold text-foreground">R$ 22 mil</span></p>
               <p className="text-sm text-muted-foreground mb-3">Misturava despesas pessoais e da clínica no cartão PJ sem critério claro.</p>
-              <p className="text-sm font-medium text-orange-600">→ retirada sem critério e dificuldade para entender o lucro real</p>
+              <p className="text-sm font-medium text-orange-600">→ resultado da análise: caixa constantemente pressionado</p>
             </Card>
             <Card className="p-8 border-0 shadow-sm">
               <h3 className="font-bold text-foreground mb-3">Advogado</h3>
@@ -453,11 +459,29 @@ export default function Home() {
       </section>
 
       <section id="plano" className="py-20 bg-muted/30">
-        <div className="container">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Plano Mensal ContaInteligente</h2>
-            <p className="text-lg text-muted-foreground">Depois da análise gratuita, se fizer sentido, você pode seguir com acompanhamento mensal para manter retirada, provisão e caixa sob controle.</p>
-          </div>
+  <div className="container">
+    <div className="text-center mb-16">
+
+      <p className="text-gray-600 text-center max-w-xl mx-auto mb-6">
+        A análise gratuita mostra o diagnóstico do seu cenário atual.
+        Se você quiser manter retirada, provisão de impostos e caixa organizados ao longo do tempo,
+        existe também a opção de acompanhamento mensal.
+      </p>
+
+      <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+        Plano Mensal ContaInteligente
+      </h2>
+
+        <p className="text-sm text-muted-foreground mb-4">
+        Acompanhamento financeiro estratégico para profissionais com CNPJ.
+        </p>
+
+      <p className="text-lg text-muted-foreground">
+        Depois da análise gratuita, se fizer sentido para você,
+        é possível seguir com acompanhamento mensal para manter sua empresa financeiramente organizada.
+      </p>
+
+    </div>
 
           <div className="max-w-2xl mx-auto">
             <Card className="p-8 border-2 border-primary shadow-lg relative">
