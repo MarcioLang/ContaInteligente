@@ -121,18 +121,18 @@ export default function Home() {
                 <BadgeCheck className="w-4 h-4" /> Atendimento humano com apoio técnico de contadora
               </div>
               <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6 leading-tight">
-                Descubra quanto você pode retirar da sua empresa sem correr risco fiscal
+                Descubra se você está retirando dinheiro demais da sua empresa
               </h1>
-              <p className="text-lg text-muted-foreground mb-3 leading-relaxed font-medium">
-                Para profissionais liberais com CNPJ que faturam bem, mas ainda vivem com dúvida sobre retirada, provisão e caixa.
+              <p className="text-lg text-muted-foreground mb-4 leading-relaxed font-medium">
+                Muitos profissionais com CNPJ faturam bem, mas retiram dinheiro sem critério e só percebem o problema quando o imposto chega ou o caixa aperta.
               </p>
-              <p className="text-base text-muted-foreground mb-8 italic">
-                “Seu problema pode não ser imposto alto. Pode ser falta de clareza sobre o dinheiro da própria empresa.”
+              <p className="text-base text-muted-foreground mb-8">
+                A análise gratuita mostra quanto você pode retirar com segurança, se sua provisão de imposto está correta e se existe risco financeiro invisível hoje na sua operação.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 mb-8">
                 <Button size="lg" className="bg-primary hover:bg-primary/90 text-white w-full sm:w-auto" onClick={() => openQualificationModal("hero-cta")}>
                   <MessageCircle className="w-5 h-5 mr-2" />
-                  Fazer Diagnóstico Fiscal Gratuito
+                  Fazer análise gratuita
                 </Button>
                 <a href="#como-funciona">
                   <Button size="lg" variant="outline" className="w-full sm:w-auto">
@@ -140,14 +140,9 @@ export default function Home() {
                   </Button>
                 </a>
               </div>
-              <p className="text-sm text-muted-foreground mb-6">
-                Prefere falar direto?{' '}
-                <a
-                  href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Olá! Vim pelo site da ContaInteligente e quero falar sobre a análise gratuita.")}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-primary font-medium hover:underline"
-                >
+              <p className="text-sm text-muted-foreground mb-5">
+                Leva menos de <span className="font-semibold text-foreground">30 segundos</span>. Prefere falar direto? {" "}
+                <a href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Olá! Vim pelo site da ContaInteligente e gostaria de fazer a análise gratuita de segurança fiscal.")}`} target="_blank" rel="noopener noreferrer" className="text-primary font-medium hover:underline">
                   Falar no WhatsApp
                 </a>
               </p>
@@ -195,6 +190,37 @@ export default function Home() {
               <p className="font-semibold text-foreground">Primeiro passo rápido</p>
               <p className="text-muted-foreground">Você responde 3 perguntas e já entendemos se faz sentido avançar.</p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20">
+        <div className="container">
+          <div className="text-center mb-14">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">O que você descobre na análise gratuita</h2>
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">Em poucos minutos você entende o que hoje está no improviso: retirada, provisão, risco e saúde financeira da PJ.</p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <Card className="p-6 border border-border shadow-sm">
+              <Calculator className="w-8 h-8 text-primary mb-4" />
+              <h3 className="font-bold text-foreground mb-2">Retirada segura</h3>
+              <p className="text-sm text-muted-foreground">Quanto você pode retirar da empresa sem comprometer o caixa e o próximo mês.</p>
+            </Card>
+            <Card className="p-6 border border-border shadow-sm">
+              <AlertCircle className="w-8 h-8 text-orange-500 mb-4" />
+              <h3 className="font-bold text-foreground mb-2">Risco fiscal</h3>
+              <p className="text-sm text-muted-foreground">Se existe risco de imposto inesperado ou provisão insuficiente no cenário atual.</p>
+            </Card>
+            <Card className="p-6 border border-border shadow-sm">
+              <FileText className="w-8 h-8 text-secondary mb-4" />
+              <h3 className="font-bold text-foreground mb-2">Provisão de imposto</h3>
+              <p className="text-sm text-muted-foreground">Se o valor reservado hoje é suficiente para não transformar o DAS em susto.</p>
+            </Card>
+            <Card className="p-6 border border-border shadow-sm">
+              <TrendingUp className="w-8 h-8 text-green-600 mb-4" />
+              <h3 className="font-bold text-foreground mb-2">Saúde da PJ</h3>
+              <p className="text-sm text-muted-foreground">Se sua empresa está operando com segurança ou se o caixa está sendo pressionado sem você perceber.</p>
+            </Card>
           </div>
         </div>
       </section>
@@ -292,9 +318,36 @@ export default function Home() {
             </Card>
           </div>
 
-          <div className="mt-16">
-            <img src="/images/dashboard-preview.png" alt="Indicadores ilustrativos da ContaInteligente" className="rounded-xl shadow-lg w-full border border-border" />
-            <p className="text-xs text-muted-foreground text-center mt-3 italic">Imagem ilustrativa para demonstrar os indicadores analisados.</p>
+          <div className="mt-16 bg-muted/30 rounded-2xl border border-border p-8 md:p-10">
+            <div className="text-center mb-10">
+              <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-3">Exemplo do que identificamos em uma análise</h3>
+              <p className="text-muted-foreground">Profissional liberal PJ com faturamento médio de R$ 27 mil.</p>
+            </div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <Card className="p-6 border border-border shadow-sm">
+                <p className="text-sm text-muted-foreground mb-2">Retirada atual</p>
+                <p className="text-3xl font-bold text-orange-600 mb-2">R$ 18.000</p>
+                <p className="text-sm text-muted-foreground">Acima do ideal para manter segurança financeira e caixa saudável.</p>
+              </Card>
+              <Card className="p-6 border border-border shadow-sm">
+                <p className="text-sm text-muted-foreground mb-2">Retirada segura sugerida</p>
+                <p className="text-3xl font-bold text-green-600 mb-2">R$ 12.500</p>
+                <p className="text-sm text-muted-foreground">Faixa que mantém provisão adequada e reduz sustos futuros.</p>
+              </Card>
+              <Card className="p-6 border border-border shadow-sm">
+                <p className="text-sm text-muted-foreground mb-2">Risco identificado</p>
+                <p className="text-xl font-bold text-red-600 mb-2">Provisão insuficiente</p>
+                <p className="text-sm text-muted-foreground">Possível diferença futura de aproximadamente R$ 9 mil se nada mudar.</p>
+              </Card>
+              <Card className="p-6 border border-border shadow-sm">
+                <p className="text-sm text-muted-foreground mb-2">Ajuste sugerido</p>
+                <p className="font-semibold text-foreground mb-2">Separar provisão mensal e definir retirada fixa</p>
+                <p className="text-sm text-muted-foreground">Clareza simples, sem depender de improviso mês a mês.</p>
+              </Card>
+            </div>
+            <div className="mt-6 text-center text-sm text-muted-foreground">
+              Você recebe algo nessa linha: um semáforo de risco + leitura dos números principais + próximo passo claro.
+            </div>
           </div>
         </div>
       </section>
@@ -336,39 +389,30 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-20 bg-white">
+      <section className="py-20">
         <div className="container">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Situações reais que encontramos na análise</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">Exemplos simples que ajudam o profissional a perceber risco antes do imposto ou do caixa apertar.</p>
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">Exemplos simples para você perceber se existe o mesmo risco aí na sua operação.</p>
           </div>
-          <div className="grid md:grid-cols-3 gap-8">
-            <Card className="p-8 border border-border shadow-sm">
-              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
-                <FileSearch className="w-6 h-6 text-primary" />
-              </div>
+          <div className="grid md:grid-cols-3 gap-8 mb-16">
+            <Card className="p-8 border-0 shadow-sm">
               <h3 className="font-bold text-foreground mb-3">Médico</h3>
-              <p className="text-sm text-muted-foreground mb-2">Faturamento médio: <span className="font-medium text-foreground">R$ 38 mil</span></p>
-              <p className="text-sm text-muted-foreground">Retirava quase todo o dinheiro da empresa sem regra definida.</p>
-              <p className="text-sm mt-3 text-destructive font-medium">→ risco de imposto inesperado e falta de caixa</p>
+              <p className="text-sm text-muted-foreground mb-3">Faturamento médio: <span className="font-semibold text-foreground">R$ 38 mil</span></p>
+              <p className="text-sm text-muted-foreground mb-3">Retirava quase todo o dinheiro da empresa para despesas pessoais e do mês.</p>
+              <p className="text-sm font-medium text-red-600">→ risco de imposto inesperado e caixa pressionado no mês seguinte</p>
             </Card>
-            <Card className="p-8 border border-border shadow-sm">
-              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
-                <AlertCircle className="w-6 h-6 text-primary" />
-              </div>
+            <Card className="p-8 border-0 shadow-sm">
               <h3 className="font-bold text-foreground mb-3">Dentista</h3>
-              <p className="text-sm text-muted-foreground mb-2">Faturamento médio: <span className="font-medium text-foreground">R$ 22 mil</span></p>
-              <p className="text-sm text-muted-foreground">Misturava despesas pessoais e despesas da clínica no mesmo fluxo.</p>
-              <p className="text-sm mt-3 text-accent font-medium">→ retirada sem critério e dificuldade de leitura do caixa</p>
+              <p className="text-sm text-muted-foreground mb-3">Faturamento médio: <span className="font-semibold text-foreground">R$ 22 mil</span></p>
+              <p className="text-sm text-muted-foreground mb-3">Misturava despesas pessoais e da clínica no cartão PJ sem critério claro.</p>
+              <p className="text-sm font-medium text-orange-600">→ retirada sem critério e dificuldade para entender o lucro real</p>
             </Card>
-            <Card className="p-8 border border-border shadow-sm">
-              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
-                <Calculator className="w-6 h-6 text-primary" />
-              </div>
+            <Card className="p-8 border-0 shadow-sm">
               <h3 className="font-bold text-foreground mb-3">Advogado</h3>
-              <p className="text-sm text-muted-foreground mb-2">Faturamento médio: <span className="font-medium text-foreground">R$ 16 mil</span></p>
-              <p className="text-sm text-muted-foreground">Pagava imposto sem provisão mensal e ajustava tudo no improviso.</p>
-              <p className="text-sm mt-3 text-secondary font-medium">→ risco de faltar caixa no momento do DAS</p>
+              <p className="text-sm text-muted-foreground mb-3">Faturamento médio: <span className="font-semibold text-foreground">R$ 16 mil</span></p>
+              <p className="text-sm text-muted-foreground mb-3">Pagava o imposto, mas sem provisão e sem reserva para meses mais fracos.</p>
+              <p className="text-sm font-medium text-red-600">→ risco de falta de caixa e aperto quando o faturamento oscila</p>
             </Card>
           </div>
         </div>
@@ -400,18 +444,26 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="py-16 border-y border-border bg-primary/5">
+        <div className="container max-w-4xl text-center">
+          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">Por que fazemos a análise gratuita</h2>
+          <p className="text-lg text-muted-foreground">Abrimos alguns diagnósticos por semana para ajudar profissionais liberais a entenderem seu cenário financeiro antes que o problema apareça no imposto ou no caixa.</p>
+          <p className="text-sm text-muted-foreground mt-4">O objetivo não é te empurrar uma venda. É te mostrar, com clareza, se existe risco hoje e qual seria o próximo passo mais inteligente.</p>
+        </div>
+      </section>
+
       <section id="plano" className="py-20 bg-muted/30">
         <div className="container">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Plano Mensal ContaInteligente</h2>
-            <p className="text-lg text-muted-foreground">Depois da análise gratuita, se fizer sentido, você pode seguir com acompanhamento mensal.</p>
+            <p className="text-lg text-muted-foreground">Depois da análise gratuita, se fizer sentido, você pode seguir com acompanhamento mensal para manter retirada, provisão e caixa sob controle.</p>
           </div>
 
           <div className="max-w-2xl mx-auto">
             <Card className="p-8 border-2 border-primary shadow-lg relative">
               <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-primary text-white px-4 py-1 rounded-full text-sm font-medium">R$ 297/mês</div>
               <h3 className="text-2xl font-bold text-foreground mb-2">Acompanhamento profissional</h3>
-              <p className="text-muted-foreground text-sm mb-6">Para quem quer manter retirada, provisão e caixa sob controle com revisão recorrente.</p>
+              <p className="text-muted-foreground text-sm mb-6">Ideal para quem quer acompanhamento simples, recorrente e técnico — sem viver decidindo retirada e imposto no improviso.</p>
               <ul className="space-y-4 mb-8">
                 <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-secondary flex-shrink-0" /><span className="text-sm text-foreground">Análise inicial completa de risco fiscal e financeiro</span></li>
                 <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-secondary flex-shrink-0" /><span className="text-sm text-foreground">Definição e revisão da regra de retirada</span></li>
@@ -420,7 +472,7 @@ export default function Home() {
                 <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-secondary flex-shrink-0" /><span className="text-sm text-foreground">Suporte via WhatsApp + revisão trimestral</span></li>
               </ul>
               <Button className="w-full bg-primary hover:bg-primary/90 text-white text-lg py-6" onClick={() => openQualificationModal("plano-r297")}>Quero começar pela análise gratuita</Button>
-              <p className="text-xs text-muted-foreground text-center mt-4">Sem fidelidade forçada. Primeiro faz sentido, depois vira rotina.</p>
+              <p className="text-xs text-muted-foreground text-center mt-4">Cancele quando quiser. Primeiro precisa fazer sentido, depois vira rotina.</p>
             </Card>
           </div>
         </div>
@@ -458,7 +510,7 @@ export default function Home() {
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Se você ainda decide retirada e imposto no improviso, a análise gratuita já pode te dar clareza</h2>
             <p className="text-lg text-white/90 mb-8">Responda 3 perguntas, fale com a ContaInteligente e entenda se existe risco invisível hoje no seu negócio.</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-white text-primary hover:bg-white/90" onClick={() => openQualificationModal("cta-final")}>Solicitar análise gratuita</Button>
+              <Button size="lg" className="bg-white text-primary hover:bg-white/90" onClick={() => openQualificationModal("cta-final")}>Fazer análise gratuita</Button>
               <a href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Olá! Vim pelo site da ContaInteligente e quero falar sobre a análise gratuita.")}`} target="_blank" rel="noopener noreferrer">
                 <Button size="lg" variant="outline" className="border-white text-white bg-transparent hover:bg-white/10">Falar direto no WhatsApp</Button>
               </a>
@@ -502,7 +554,7 @@ export default function Home() {
             </div>
             <div>
               <h4 className="font-bold mb-4">Nota importante</h4>
-              <p className="text-sm text-white/60">A ContaInteligente complementa a contabilidade tradicional com leitura mensal de retirada, provisão e caixa.</p>
+              <p className="text-sm text-white/60">A ContaInteligente complementa a contabilidade tradicional com leitura mensal de retirada, provisão, caixa e próximos passos claros.</p>
             </div>
           </div>
           <div className="border-t border-white/10 pt-8 text-center text-sm text-white/60">
@@ -514,10 +566,11 @@ export default function Home() {
       <button
         type="button"
         onClick={() => openQualificationModal("whatsapp-flutuante")}
-        className="fixed bottom-5 right-5 z-50 rounded-full bg-primary text-white shadow-xl hover:bg-primary/90 transition w-14 h-14 flex items-center justify-center"
+        className="fixed bottom-5 right-5 z-50 rounded-full bg-primary text-white shadow-xl hover:bg-primary/90 transition px-4 h-14 flex items-center justify-center gap-2"
         aria-label="Abrir WhatsApp da ContaInteligente"
       >
-        <MessageCircle className="w-6 h-6" />
+        <MessageCircle className="w-5 h-5" />
+        <span className="hidden sm:inline text-sm font-medium">WhatsApp</span>
       </button>
 
       {isModalOpen && (
