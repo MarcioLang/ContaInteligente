@@ -51,12 +51,21 @@ export default function Home() {
 
   const handleContinueWhatsApp = () => {
     const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    
     if (isMobile) {
+      // No celular, redireciona a própria aba
       window.location.href = whatsappUrl;
     } else {
-      window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+      // No PC, abre em nova aba e garante o foco nela
+      const newWindow = window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+      if (newWindow) newWindow.focus();
     }
-    setIsModalOpen(false);
+
+    // O segredo: esperamos 200ms para fechar a modal. 
+    // Isso evita que o navegador cancele a abertura do link ao desmontar o botão.
+    setTimeout(() => {
+      setIsModalOpen(false);
+    }, 200);
   };
 
   const faqItems = [
