@@ -1,0 +1,301 @@
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { 
+  CheckCircle2, AlertCircle, TrendingUp, Shield, FileText, Lock, 
+  Users, MessageCircle, X, Clock3, BadgeCheck 
+} from "lucide-react";
+import { useState, useCallback } from "react";
+
+type Answer = "sim" | "nao" | "as_vezes" | "";
+
+const WHATSAPP_NUMBER = "5561995788904";
+
+export default function Home() {
+  const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [ctaSource, setCtaSource] = useState("landing");
+  const [name, setName] = useState("");
+  const [profession, setProfession] = useState("");
+  const [answer1, setAnswer1] = useState<Answer>("");
+  const [answer2, setAnswer2] = useState<Answer>("");
+  const [answer3, setAnswer3] = useState<Answer>("");
+
+  const openQualificationModal = useCallback((source: string) => {
+    setCtaSource(source);
+    setIsModalOpen(true);
+  }, []);
+
+  const resetModal = useCallback(() => {
+    setName("");
+    setProfession("");
+    setAnswer1("");
+    setAnswer2("");
+    setAnswer3("");
+    setCtaSource("landing");
+    setIsModalOpen(false);
+  }, []);
+
+  const handleContinueWhatsApp = () => {
+    const parts = [
+      "Olá! Vim pela landing page da ContaInteligente e quero solicitar a análise gratuita.",
+      `Origem: ${ctaSource}`,
+      name ? `Nome: ${name}` : "",
+      profession ? `Profissão: ${profession}` : "",
+      answer1 ? `1) Atua como profissional liberal com CNPJ ativo? ${answer1}` : "",
+      answer2 ? `2) Faz transferências PJ→PF sem critério fixo? ${answer2}` : "",
+      answer3 ? `3) Já teve dificuldade com impostos por falta de provisão? ${answer3}` : "",
+      "Pode me orientar sobre o próximo passo?",
+    ].filter(Boolean);
+
+    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(parts.join("\n"))}`;
+    
+    // MELHORIA: Redirecionamento direto para evitar que a janela feche no PC
+    window.location.assign(url);
+    setIsModalOpen(false);
+  };
+
+  const canContinue = Boolean(answer1 && answer2 && answer3);
+
+  const faqItems = [
+    {
+      pergunta: "Meus dados são seguros?",
+      resposta: "Sim. Pedimos apenas o necessário para a análise, tratamos tudo com sigilo e nunca pedimos senha bancária.",
+    },
+    {
+      pergunta: "Isso substitui meu contador?",
+      resposta: "Não. A ContaInteligente complementa a contabilidade tradicional. O contador cuida das obrigações; nós ajudamos na definição de retirada segura.",
+    },
+    {
+      pergunta: "O que eu recebo na análise gratuita?",
+      resposta: "Um diagnóstico rápido com semáforo de risco, resumo dos números principais e um próximo passo claro.",
+    },
+    {
+      pergunta: "Como funciona o plano mensal?",
+      resposta: "Depois da análise, se fizer sentido, pode contratar o acompanhamento mensal por R$ 297 para manter a sua saúde fiscal em dia.",
+    }
+  ];
+
+  return (
+    <div className="min-h-screen bg-white font-sans">
+      {/* HEADER */}
+      <header className="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-slate-200">
+        <div className="container mx-auto px-4 flex items-center justify-between h-16">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 bg-primary rounded flex items-center justify-center">
+              <Shield className="text-white w-5 h-5" />
+            </div>
+            <div className="flex flex-col">
+              <span className="font-bold text-lg leading-tight">ContaInteligente</span>
+              <span className="text-[10px] text-slate-500 uppercase tracking-tighter">Segurança Fiscal PJ/PF</span>
+            </div>
+          </div>
+          <nav className="hidden md:flex items-center gap-8">
+            <a href="#como-funciona" className="text-sm font-medium hover:text-primary transition">Como Funciona</a>
+            <a href="#plano" className="text-sm font-medium hover:text-primary transition">Plano Mensal</a>
+            <Button variant="outline" size="sm" onClick={() => openQualificationModal("header")}>Análise Gratuita</Button>
+          </nav>
+        </div>
+      </header>
+
+      {/* HERO SECTION */}
+      <section className="relative py-16 md:py-24 bg-gradient-to-b from-slate-50 to-white">
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-bold mb-6">
+                <BadgeCheck className="w-4 h-4" /> CONSULTORIA TÉCNICA ESPECIALIZADA
+              </div>
+              <h1 className="text-4xl md:text-6xl font-extrabold text-slate-900 mb-6 leading-tight">
+                Pare de retirar dinheiro da sua empresa no escuro
+              </h1>
+              <p className="text-lg text-slate-600 mb-8 leading-relaxed">
+                Descubra se a sua retirada de lucro está correta ou se está a criar um risco fiscal invisível para o seu património pessoal.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Button size="lg" className="bg-primary hover:bg-primary/90 h-14 px-8 text-white shadow-xl" onClick={() => openQualificationModal("hero")}>
+                  <MessageCircle className="w-5 h-5 mr-2" /> Fazer análise gratuita
+                </Button>
+                <a href="#como-funciona" className="w-full sm:w-auto">
+                  <Button size="lg" variant="outline" className="w-full h-14">Ver método</Button>
+                </a>
+              </div>
+            </div>
+            <div className="relative">
+              <div className="bg-slate-200 rounded-2xl w-full h-80 md:h-[450px] shadow-2xl overflow-hidden">
+                {/* Aqui podes colocar a tua imagem de Hero */}
+                <div className="w-full h-full bg-slate-100 flex items-center justify-center text-slate-400">
+                   <TrendingUp size={80} opacity={0.2} />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SECÇÃO DE RISCOS */}
+      <section id="como-funciona" className="py-20 bg-white">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl font-bold mb-12">Os 3 erros fatais do Profissional Liberal</h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            <Card className="p-8 border-none shadow-lg bg-slate-50">
+              <AlertCircle className="w-12 h-12 text-red-500 mb-4 mx-auto" />
+              <h3 className="font-bold text-xl mb-3">Confusão Patrimonial</h3>
+              <p className="text-slate-600 text-sm">Pagar contas da casa com o cartão da empresa sem o registo correto de lucro.</p>
+            </Card>
+            <Card className="p-8 border-none shadow-lg bg-slate-50">
+              <TrendingUp className="w-12 h-12 text-orange-500 mb-4 mx-auto" />
+              <h3 className="font-bold text-xl mb-3">Retirada Variável</h3>
+              <p className="text-slate-600 text-sm">Tirar valores diferentes todos os meses baseados apenas no saldo bancário momentâneo.</p>
+            </Card>
+            <Card className="p-8 border-none shadow-lg bg-slate-50">
+              <FileText className="w-12 h-12 text-blue-500 mb-4 mx-auto" />
+              <h3 className="font-bold text-xl mb-3">Falta de Provisão</h3>
+              <p className="text-slate-600 text-sm">Não separar mensalmente o valor dos impostos trimestrais ou anuais.</p>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* QUEM ATENDEMOS */}
+      <section className="py-20 bg-slate-900 text-white">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl font-bold mb-12">Especialistas no seu cenário</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {["Médicos", "Dentistas", "Advogados", "Engenheiros"].map(p => (
+              <div key={p} className="p-6 border border-white/10 rounded-xl bg-white/5 font-bold">
+                <Users className="mx-auto mb-3 text-primary" /> {p}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* PLANO MENSAL */}
+      <section id="plano" className="py-20 bg-white">
+        <div className="container mx-auto px-4 max-w-4xl">
+          <div className="bg-primary/5 border-2 border-primary rounded-3xl p-8 md:p-12 text-center relative overflow-hidden">
+             <div className="absolute top-0 right-0 bg-primary text-white px-6 py-2 rounded-bl-2xl font-bold">R$ 297/mês</div>
+             <h2 className="text-3xl font-bold mb-4">Acompanhamento Mensal</h2>
+             <p className="text-slate-600 mb-8 max-w-md mx-auto">Após a análise gratuita, mantenha a sua segurança com o nosso acompanhamento recorrente.</p>
+             <div className="grid md:grid-cols-2 gap-4 text-left mb-10 max-w-lg mx-auto">
+                <div className="flex items-center gap-2 text-sm font-medium"><CheckCircle2 className="text-primary w-4 h-4"/> Regra de Retirada Fixa</div>
+                <div className="flex items-center gap-2 text-sm font-medium"><CheckCircle2 className="text-primary w-4 h-4"/> Provisão de Impostos</div>
+                <div className="flex items-center gap-2 text-sm font-medium"><CheckCircle2 className="text-primary w-4 h-4"/> Relatório de Saúde Fiscal</div>
+                <div className="flex items-center gap-2 text-sm font-medium"><CheckCircle2 className="text-primary w-4 h-4"/> Suporte via WhatsApp</div>
+             </div>
+             <Button size="lg" className="bg-primary hover:bg-primary/90 h-14 px-12" onClick={() => openQualificationModal("plano")}>Começar com Análise Gratuita</Button>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="py-20 bg-slate-50">
+        <div className="container mx-auto px-4 max-w-3xl">
+          <h2 className="text-3xl font-bold text-center mb-12">Dúvidas Frequentes</h2>
+          <div className="space-y-3">
+            {faqItems.map((item, i) => (
+              <Card key={i} className="cursor-pointer overflow-hidden border-slate-200" onClick={() => setExpandedFaq(expandedFaq === i ? null : i)}>
+                <div className="p-5 flex justify-between items-center font-bold">
+                  {item.pergunta}
+                  <X className={`w-5 h-5 transition-transform ${expandedFaq === i ? "rotate-0" : "rotate-45"}`} />
+                </div>
+                {expandedFaq === i && <div className="p-5 pt-0 text-slate-600 border-t border-slate-100">{item.resposta}</div>}
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FOOTER */}
+      <footer className="py-12 border-t border-slate-200 text-center">
+        <p className="text-slate-400 text-sm">© 2026 ContaInteligente - Segurança Fiscal e Patrimonial.</p>
+      </footer>
+
+      {/* BOTÃO FLUTUANTE */}
+      <button
+        type="button"
+        onClick={() => openQualificationModal("whatsapp-float")}
+        className="fixed bottom-6 right-6 z-50 rounded-full bg-primary text-white shadow-2xl hover:scale-105 transition-transform px-6 h-16 flex items-center justify-center gap-3"
+      >
+        <MessageCircle className="w-6 h-6" />
+        <span className="hidden sm:inline font-bold">Análise Gratuita</span>
+      </button>
+
+      {/* MODAL DE QUALIFICAÇÃO */}
+      {isModalOpen && (
+        <div className="fixed inset-0 z-[60] bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-white rounded-3xl shadow-2xl max-w-lg w-full p-8 relative max-h-[95vh] overflow-y-auto">
+            <button onClick={resetModal} className="absolute top-6 right-6 text-slate-400 hover:text-slate-600 transition">
+              <X className="w-6 h-6" />
+            </button>
+            
+            <h3 className="text-2xl font-bold text-slate-900 mb-2">Análise de Segurança</h3>
+            <p className="text-sm text-slate-500 mb-8">Leva menos de 30 segundos. Suas respostas são sigilosas.</p>
+
+            <div className="space-y-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="space-y-1">
+                  <label className="text-xs font-bold text-slate-400 uppercase">Seu Nome</label>
+                  <input value={name} onChange={(e) => setName(e.target.value)} className="w-full rounded-xl border-slate-200 border p-3 text-sm focus:ring-2 focus:ring-primary/20 outline-none" placeholder="Ex: João Silva" />
+                </div>
+                <div className="space-y-1">
+                  <label className="text-xs font-bold text-slate-400 uppercase">Profissão</label>
+                  <input value={profession} onChange={(e) => setProfession(e.target.value)} className="w-full rounded-xl border-slate-200 border p-3 text-sm focus:ring-2 focus:ring-primary/20 outline-none" placeholder="Ex: Médico" />
+                </div>
+              </div>
+
+              <div className="space-y-6 pt-4 border-t border-slate-100">
+                <QuestionBlock title="1) Possui CNPJ ativo?" value={answer1} onChange={setAnswer1} options={[{ value: "sim", label: "Sim" }, { value: "nao", label: "Não" }]} />
+                <QuestionBlock title="2) Transfere PJ→PF sem critério?" value={answer2} onChange={setAnswer2} options={[{ value: "sim", label: "Sim" }, { value: "as_vezes", label: "Às vezes" }, { value: "nao", label: "Não" }]} />
+                <QuestionBlock title="3) Já teve susto com imposto?" value={answer3} onChange={setAnswer3} options={[{ value: "sim", label: "Sim" }, { value: "as_vezes", label: "Quase" }, { value: "nao", label: "Não" }]} />
+              </div>
+
+              {/* BOTÕES AJUSTADOS: Continuar (Topo) e Cancelar (Baixo) */}
+              <div className="flex flex-col gap-3 pt-4">
+                <Button 
+                  className="w-full bg-primary hover:bg-primary/90 text-white h-14 text-lg font-bold rounded-2xl shadow-lg shadow-primary/20" 
+                  onClick={handleContinueWhatsApp} 
+                  disabled={!canContinue}
+                >
+                  Continuar no WhatsApp
+                </Button>
+                <Button 
+                  variant="ghost" 
+                  className="w-full h-12 text-slate-400 font-medium" 
+                  onClick={resetModal}
+                >
+                  Cancelar e fechar
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// COMPONENTE AUXILIAR DE PERGUNTA
+function QuestionBlock({ title, value, onChange, options }: { title: string, value: Answer, onChange: (v: Answer) => void, options: { value: Answer, label: string }[] }) {
+  return (
+    <div className="space-y-3">
+      <p className="text-sm font-bold text-slate-700">{title}</p>
+      <div className="flex gap-2">
+        {options.map((opt) => (
+          <button
+            key={opt.value}
+            type="button"
+            onClick={() => onChange(opt.value)}
+            className={`flex-1 py-3 rounded-xl text-sm font-bold border-2 transition ${
+              value === opt.value 
+                ? "bg-primary border-primary text-white shadow-md shadow-primary/20" 
+                : "bg-white border-slate-100 text-slate-400 hover:border-slate-200"
+            }`}
+          >
+            {opt.label}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
