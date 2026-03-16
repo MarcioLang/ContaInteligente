@@ -53,16 +53,13 @@ export default function Home() {
     const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
     
     if (isMobile) {
-      // No celular, redireciona a própria aba
       window.location.href = whatsappUrl;
     } else {
-      // No PC, abre em nova aba e garante o foco nela
       const newWindow = window.open(whatsappUrl, "_blank", "noopener,noreferrer");
       if (newWindow) newWindow.focus();
     }
 
-    // O segredo: esperamos 200ms para fechar a modal. 
-    // Isso evita que o navegador cancele a abertura do link ao desmontar o botão.
+    // Delay para garantir que o navegador processe o link antes da modal fechar
     setTimeout(() => {
       setIsModalOpen(false);
     }, 200);
@@ -155,6 +152,10 @@ export default function Home() {
                 </a>
               </div>
               <p className="text-sm text-muted-foreground mb-5">
+                <span className="inline-flex items-center gap-1 text-orange-600 font-medium bg-orange-50 px-2 py-0.5 rounded-md mb-2">
+                  <Clock3 className="w-3 h-3" /> Apenas 3 vagas de diagnóstico gratuito disponíveis para esta semana
+                </span>
+                <br />
                 Leva menos de <span className="font-semibold text-foreground">30 segundos</span>. Prefere falar direto? {" "}
                 <a href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Olá! Vim pelo site da ContaInteligente e gostaria de fazer a análise gratuita de segurança fiscal.")}`} target="_blank" rel="noopener noreferrer" className="text-primary font-medium hover:underline">
                   Falar no WhatsApp
@@ -247,36 +248,36 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <Card className="p-8 border-0 shadow-sm hover:shadow-md transition">
+            <Card className="p-8 border-0 shadow-sm hover:shadow-md transition border-t-4 border-red-500">
               <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mb-6">
                 <AlertCircle className="w-6 h-6 text-red-600" />
               </div>
               <h3 className="text-xl font-bold text-foreground mb-3">Mistura de contas PJ e PF</h3>
               <p className="text-muted-foreground mb-4">Você usa a empresa para resolver gastos pessoais sem perceber o impacto no caixa e na leitura real do negócio.</p>
               <div className="pt-4 border-t border-border">
-                <p className="text-sm font-medium text-red-600">Sinal típico: dinheiro sai da PJ sempre que surge uma necessidade pessoal</p>
+                <p className="text-sm font-medium text-red-600">Nível de Risco: Alto</p>
               </div>
             </Card>
 
-            <Card className="p-8 border-0 shadow-sm hover:shadow-md transition">
+            <Card className="p-8 border-0 shadow-sm hover:shadow-md transition border-t-4 border-orange-500">
               <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-6">
                 <TrendingUp className="w-6 h-6 text-orange-600" />
               </div>
               <h3 className="text-xl font-bold text-foreground mb-3">Retirada sem regra</h3>
               <p className="text-muted-foreground mb-4">Você fatura bem, mas não tem uma régua clara para saber quanto pode tirar sem comprometer o mês seguinte.</p>
               <div className="pt-4 border-t border-border">
-                <p className="text-sm font-medium text-orange-600">Sinal típico: decisão de retirada baseada na urgência, não em critério</p>
+                <p className="text-sm font-medium text-orange-600">Nível de Risco: Médio/Alerta</p>
               </div>
             </Card>
 
-            <Card className="p-8 border-0 shadow-sm hover:shadow-md transition">
+            <Card className="p-8 border-0 shadow-sm hover:shadow-md transition border-t-4 border-yellow-500">
               <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-6">
                 <FileText className="w-6 h-6 text-yellow-600" />
               </div>
               <h3 className="text-xl font-bold text-foreground mb-3">Provisão fraca de impostos</h3>
               <p className="text-muted-foreground mb-4">O imposto não está “caro”: ele só chega sem planejamento. E isso faz parecer que o dinheiro desapareceu.</p>
               <div className="pt-4 border-t border-border">
-                <p className="text-sm font-medium text-yellow-600">Sinal típico: pagar guia no susto ou perto do vencimento</p>
+                <p className="text-sm font-medium text-yellow-600">Nível de Risco: Atenção</p>
               </div>
             </Card>
           </div>
@@ -645,9 +646,15 @@ export default function Home() {
               />
             </div>
 
-            <div className="bg-muted/40 border border-border rounded-xl p-4 mt-6 mb-6 text-sm text-muted-foreground">
-              <p className="font-medium text-foreground mb-1">Privacidade e sigilo</p>
-              <p>Você não precisa informar senha bancária. Nosso primeiro passo é entender seu cenário com base nas respostas e, se fizer sentido, seguir com a análise.</p>
+            <div className="bg-blue-50 border border-blue-100 rounded-xl p-4 mt-6 mb-6">
+              <div className="flex items-center gap-2 mb-1">
+                <Lock className="w-4 h-4 text-blue-600" />
+                <p className="font-bold text-blue-900 text-sm">Privacidade e Sigilo Garantidos</p>
+              </div>
+              <p className="text-xs text-blue-800 leading-relaxed">
+                Seus dados são usados exclusivamente para o diagnóstico inicial. 
+                <strong> Jamais solicitamos senhas, tokens ou acesso direto à sua conta bancária.</strong>
+              </p>
             </div>
 
             <div className="flex flex-col gap-3">
@@ -657,7 +664,7 @@ export default function Home() {
     onClick={handleContinueWhatsApp} 
     disabled={!canContinue}
   >
-    Continuar no WhatsApp
+    Receber meu Diagnóstico Gratuito
   </Button>
 
   {/* Botão de Cancelar vem depois para ficar embaixo */}
